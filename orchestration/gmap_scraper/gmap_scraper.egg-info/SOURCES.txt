@@ -1,0 +1,12 @@
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+gmap_scraper/__init__.py
+gmap_scraper/assets.py
+gmap_scraper/definitions.py
+gmap_scraper.egg-info/PKG-INFO
+gmap_scraper.egg-info/SOURCES.txt
+gmap_scraper.egg-info/dependency_links.txt
+gmap_scraper.egg-info/requires.txt
+gmap_scraper.egg-info/top_level.txt

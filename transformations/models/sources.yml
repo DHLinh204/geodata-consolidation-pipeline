@@ -1,0 +1,42 @@
+version: 2
+
+sources:
+  - name: staging
+    database: gmap_scraper
+    schema: stagging
+    tables:
+      - name: geocode_results
+        description: "Main geocoding results from Google Maps API"
+        columns:
+          - name: _dlt_id
+            description: "Unique identifier from dlt"
+          - name: formatted_address
+            description: "Formatted address from geocoding"
+
+      - name: geocode_results__address_components
+        description: "Address components broken down (nested table)"
+        columns:
+          - name: _dlt_parent_id
+            description: "Foreign key to geocode_results"
+          - name: long_name
+            description: "Long form of address component"
+          - name: short_name
+            description: "Short form of address component"
+
+      - name: geocode_results__types
+        description: "Geometry location types (nested table)"
+        columns:
+          - name: _dlt_parent_id
+            description: "Foreign key to geocode_results"
+          - name: value
+            description: "Type value"
+
+      - name: geocode_results__navigation_points
+        description: "Navigation points/viewports (nested table)"
+        columns:
+          - name: _dlt_parent_id
+            description: "Foreign key to geocode_results"
+          - name: location__latitude
+            description: "Latitude coordinate"
+          - name: location__longitude
+            description: "Longitude coordinate"
