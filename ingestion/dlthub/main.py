@@ -2,9 +2,12 @@ import dlt
 from dlt.sources.rest_api import rest_api_source
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 import psycopg2
 
-load_dotenv()
+# .env project root
+env_path = Path(__file__).parent.parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 conn = psycopg2.connect(
     host=os.getenv('POSTGRES_HOST'),

@@ -1,5 +1,24 @@
+# dbt artifacts
 target/
 dbt_packages/
 logs/
 dbt_internal_packages/
 __pycache__/
+
+# Python
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+
+# IDE & temp files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local

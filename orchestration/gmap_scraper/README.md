@@ -1,24 +1,56 @@
 # gmap_scraper
 
-This is a [Dagster](https://dagster.io/) project scaffolded with [`dagster project scaffold`](https://docs.dagster.io/guides/build/projects/creating-a-new-project).
+Dagster orchestration project for the Geodata Consolidation Pipeline. Automates the data ingestion → transformation workflow for Google Maps geocoding data.
+
+## Workflow Overview
+
+The pipeline consists of 2 automated assets:
+
+1. **fetch_geocode_data** - Ingests geocoding data
+   - Reads addresses from PostgreSQL `raw.wards` table
+   - Calls Google Maps Geocode API via dlt
+   - Loads results into `stagging.geocode_results`
+
+2. **run_dbt_transform** - Transforms & consolidates data (depends on asset 1)
+   - Runs dbt models to consolidate geocoding results
+   - Creates `dwh.geocode_consolidated` table
+   - Executes dbt tests for data quality
 
 ## Getting started
 
-First, install your Dagster code location as a Python package. By using the --editable flag, pip will install your Python package in ["editable mode"](https://pip.pypa.io/en/latest/topics/local-project-installs/#editable-installs) so that as you develop, local code changes will automatically apply.
+1. Activate virtual environment:
+
+```bash
+source ../../.venv/bin/activate
+```
+
+2. Install dependencies:
 
 ```bash
 pip install -e ".[dev]"
 ```
 
-Then, start the Dagster UI web server:
+3. Start Dagster UI:
 
 ```bash
 dagster dev
 ```
 
-Open http://localhost:3000 with your browser to see the project.
+4. Open http://localhost:3000 in your browser
 
-You can start writing assets in `gmap_scraper/assets.py`. The assets are automatically loaded into the Dagster code location as you define them.
+## Using the Assets
+
+### Manual Run (via Dagster UI)
+
+- Navigate to **Assets** tab
+- Click **Materialize** button on any asset or use **Materialize all** to run the full pipeline
+- `fetch_geocode_data` must complete first before `run_dbt_transform` can run (dependency enforced)
+
+### Monitor Execution
+
+- View asset lineage and dependencies in the **Lineage** tab
+- Check logs and execution details in **Events** tab
+- See run history in **Runs** tab
 
 ## Development
 

@@ -1,10 +1,11 @@
-.venv/
-logs/
-__pycache__/
-.env/
+# Dagster
+.dagster/
+.tmp_dagster_home*/
+dagster_home/
 
 # Python packaging
 *.egg-info/
+gmap_scraper.egg-info/
 dist/
 build/
 *.pyc
@@ -16,10 +17,12 @@ build/
 .coverage
 htmlcov/
 
-# Dagster
-.dagster/
-.tmp_dagster_home*/
-dagster_home/
+# Environment
+.venv/
+venv/
+env/
+.env
+.env.local
 
 # IDE
 .vscode/
@@ -27,8 +30,11 @@ dagster_home/
 *.swp
 *.swo
 *~
-.DS_Store
 
 # OS
+.DS_Store
 Thumbs.db
 
+# Logs
+*.log
+logs/

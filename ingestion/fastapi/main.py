@@ -6,8 +6,11 @@ from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker, declarative_base, Session
 import os
 from dotenv import load_dotenv
+from pathlib import Path
 
-load_dotenv()
+# .env project root
+env_path = Path(__file__).parent.parent.parent / '.env'
+load_dotenv(dotenv_path=env_path)
 
 DATABASE_URL = f"postgresql://{os.getenv('POSTGRES_USER')}:{os.getenv('POSTGRES_PASSWORD_PROJECT_CRAWL')}@{os.getenv('POSTGRES_HOST')}:{os.getenv('POSTGRES_PORT_PROJECT_CRAWL')}/{os.getenv('POSTGRES_DB_PROJECT_CRAWL')}"
 
