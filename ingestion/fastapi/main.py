@@ -85,7 +85,6 @@ def import_wards_from_text(
     Example data:
     Thành Sen, Trần Phú, Cẩm Bình, Thạch Khê, Đồng  Tiến, Thạch Lạc
     """
-    # Split theo dấu ',' để tách các tên
     names = [x.strip() for x in payload.data.split(',')]
     
     parsed_wards = []

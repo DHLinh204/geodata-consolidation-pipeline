@@ -1,7 +1,7 @@
 .venv/
 logs/
 __pycache__/
-.env/
+.env
 
 # Python packaging
 *.egg-info/

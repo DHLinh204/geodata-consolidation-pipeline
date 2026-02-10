@@ -6,10 +6,11 @@ Dagster orchestration project for the Geodata Consolidation Pipeline. Automates 
 
 The pipeline consists of 2 automated assets:
 
-1. **fetch_geocode_data** - Ingests geocoding data
-   - Reads addresses from PostgreSQL `raw.wards` table
+1. **fetch_geocode_data** - Ingests geocoding data (with incremental loading)
+   - Reads **only NEW addresses** from PostgreSQL `raw.wards` table (not already processed)
    - Calls Google Maps Geocode API via dlt
-   - Loads results into `stagging.geocode_results`
+   - Loads results into `staging.geocode_results`
+   - Tracks state internally to avoid reprocessing the same addresses
 
 2. **run_dbt_transform** - Transforms & consolidates data (depends on asset 1)
    - Runs dbt models to consolidate geocoding results
@@ -51,6 +52,51 @@ dagster dev
 - View asset lineage and dependencies in the **Lineage** tab
 - Check logs and execution details in **Events** tab
 - See run history in **Runs** tab
+
+## Incremental Geocoding
+
+The pipeline supports **incremental data loading** - it only geocodes addresses that haven't been processed yet, avoiding redundant API calls.
+
+### How It Works
+
+1. **State Tracking**: dlt maintains internal state tracking the `last_processed_ward_id`
+2. **Only New Wards**: Each run queries only wards with `id > last_processed_ward_id`
+3. **Batch Processing**: Processes wards in configurable batches (default: 50 per run)
+4. **Automatic Resume**: If a run fails, the next run picks up from where it left off
+
+### Manual Geocoding Run
+
+You can also manually trigger geocoding without Dagster:
+
+```bash
+# From project root
+cd ingestion/dlthub
+
+# Activate venv
+source ../../.venv/bin/activate
+
+# Run incremental geocoding
+python main.py
+```
+
+Output example:
+
+```
+============================================================
+Starting incremental geocoding pipeline
+Last processed ward ID: 150
+============================================================
+Processing batch of 50 wards
+[151] Geocoding: Ward Name Here
+✓ [Ward 151] Completed successfully
+...
+============================================================
+Incremental geocoding completed!
+Total processed: 50
+Total failed: 0
+Last processed ward ID: 200
+============================================================
+```
 
 ## Development
 

@@ -102,8 +102,8 @@ POSTGRES_PASSWORD_PROJECT_CRAWL=your_secure_password
 POSTGRES_PORT_PROJECT_CRAWL=5433
 POSTGRES_DB_PROJECT_CRAWL=gmap_scraper
 
-# Google Maps API
-key=your_google_maps_geocode_api_key
+# Google Maps API Key (for incremental geocoding)
+GOOGLE_MAPS_API_KEY=your_google_maps_geocode_api_key
 ```
 
 ### Step 3: Secure .env File
@@ -124,7 +124,7 @@ grep ".env" .gitignore
 | POSTGRES_PASSWORD_PROJECT_CRAWL | Database password       | secure_password_123   |
 | POSTGRES_PORT_PROJECT_CRAWL     | Database port           | 5433                  |
 | POSTGRES_DB_PROJECT_CRAWL       | Database name           | gmap_scraper          |
-| key                             | Google Maps API key     | AIzaSyDxxxxxxxxxxxxxx |
+| GOOGLE_MAPS_API_KEY             | Google Maps API key     | AIzaSyDxxxxxxxxxxxxxx |
 
 ## Database Setup
 

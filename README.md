@@ -13,7 +13,6 @@ The Geodata Consolidation Pipeline is an end-to-end solution that:
 - Provides REST APIs for data import and management
 
 ## Project Structure
-
 ```
 geodata-consolidation-pipeline/
 ├── ingestion/                      # Data ingestion layer
