@@ -6,6 +6,8 @@ A comprehensive data pipeline for consolidating geographic data from Google Maps
 
 The Geodata Consolidation Pipeline is an end-to-end solution that:
 
+![alt text](./img/image.png)
+
 - Ingests address data from multiple sources
 - Geocodes addresses using Google Maps API
 - Orchestrates complex data workflows using Dagster
@@ -13,6 +15,7 @@ The Geodata Consolidation Pipeline is an end-to-end solution that:
 - Provides REST APIs for data import and management
 
 ## Project Structure
+
 ```
 geodata-consolidation-pipeline/
 ├── ingestion/                      # Data ingestion layer
